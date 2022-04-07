@@ -1,0 +1,24 @@
+{
+  "name": "04-app-clima",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joao-00/04-App-Clima.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joao-00/04-App-Clima/issues"
+  },
+  "homepage": "https://github.com/Joao-00/04-App-Clima#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.2"
+  }
+}
