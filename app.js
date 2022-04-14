@@ -27,13 +27,13 @@ const main = async() => {
                 const lugar = await leerInput('Ciudad: ');
                 await busquedas.ciudad(lugar);
 
-                //buscar los lugar
+                //TODO: buscar los lugar 
 
-                //seleccionar el lugar
+                //TODO: seleccionar el lugar
 
-                //clima
+                //TODO: clima
 
-                //mostrar resultados
+                //TODO: mostrar resultados
 
                 console.log('\nInformacion de la ciudad\n'.green);
                 console.log('Ciudad: ');
