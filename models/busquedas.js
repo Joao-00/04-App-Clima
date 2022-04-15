@@ -11,7 +11,7 @@ class Busquedas{
 
     get paramsMapbox() {
         return {
-            'access-token': 'pk.eyJ1IjoiYzBkeXNhbiIsImEiOiJjbDFzZ243dHkwczBiM2lzNmQwNGZ6aXQ0In0.vfTxRw-K0Gy4__GbojL_rg',
+            'access_token': process.env.MAPBOX_KEY,
             'limit': 5,
             'language': 'es'
         }
@@ -27,10 +27,15 @@ class Busquedas{
                 params: this.paramsMapbox
             });
 
-            const resp = intance.get();
-            console.log(resp.data);
-
-            return [];
+            const resp = await intance.get();
+            //esta forma ( lugar => ({})) es para retornar un objeto de forma implicita
+            return resp.data.features.map( lugar => ({
+                id: lugar.id,
+                nombre: lugar.place_name,
+                lng: lugar.center[0],
+                lat: lugar.center[1]
+            }));
+           
 
         } catch (error) {
             return [];

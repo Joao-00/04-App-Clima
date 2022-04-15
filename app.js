@@ -6,8 +6,14 @@
 //paquete fech: https://www.npmjs.com/package/fetch referencia, se utiliza mucho en el lado del frontend
 //paquete axios: https://www.npmjs.com/package/axios este paquete trabaja en base a promesas
 
-const { leerInput, inquirerMenu, pausa } = require("./helpers/inquirer");
+// paquete dotenv: https://www.npmjs.com/package/dotenv para declarar variables de otros archivos
+// va con el archivo .env
+
+
+require('dotenv').config()
+const { leerInput, inquirerMenu, pausa, listarLugares } = require("./helpers/inquirer");
 const Busquedas = require("./models/busquedas");
+
 
 
 const main = async() => {
@@ -23,25 +29,29 @@ const main = async() => {
 
         switch (opt) {
             case 1:
-                //mostrar mensaje
-                const lugar = await leerInput('Ciudad: ');
-                await busquedas.ciudad(lugar);
-
+                //TODO: mostrar mensaje
+                const termino = await leerInput('Ciudad: ');
+                
                 //TODO: buscar los lugar 
-
+                const lugares = await busquedas.ciudad(termino);
+                
                 //TODO: seleccionar el lugar
-
+                const id = await listarLugares(lugares);
+                // metodo .find() metodo propio de js - regresara el primer elemento que especificas en el coldback
+                const lugarSel = lugares.find(l => l.id === id);
+                console.log(lugarSel);
+                
                 //TODO: clima
 
                 //TODO: mostrar resultados
 
                 console.log('\nInformacion de la ciudad\n'.green);
-                console.log('Ciudad: ');
-                console.log('Lat: ');
-                console.log('Lng: ');
-                console.log('Temperatura: ');
-                console.log('Minima: ');
-                console.log('Maxima: ');
+                console.log('Ciudad:', lugarSel.nombre);
+                console.log('Lat:', lugarSel.lat);
+                console.log('Lng:', lugarSel.lng);
+                console.log('Temperatura:', );
+                console.log('Minima:', );
+                console.log('Maxima:', );
 
                 break;
 
