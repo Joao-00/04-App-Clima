@@ -40,9 +40,43 @@ class Busquedas{
         } catch (error) {
             return [];
         }
-
-        return []; //retornar los lugares
     }
+
+    get paramsWeatherMap(){
+        return{
+            //?lat=9.93333&lon=-84.08333
+            'appid': c7537c8fce9806c2854e97138e9088d9,
+            'units': metric,
+            'lang': es
+        }
+    }
+
+
+    async climaLugar (lat, lon) {
+        try {
+            
+            const instance = axios.create({
+                baseURL: `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}`,
+                //api.openweathermap.org/data/2.5/weather
+                
+
+            });
+
+            //resp.data
+
+            return{
+                desc: '',
+                min: '',
+                max: '',
+                temp: ''
+            }
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 

@@ -42,6 +42,7 @@ const main = async() => {
                 console.log(lugarSel);
                 
                 //TODO: clima
+                const clima = await busquedas.climaLugar()
 
                 //TODO: mostrar resultados
 
@@ -52,6 +53,7 @@ const main = async() => {
                 console.log('Temperatura:', );
                 console.log('Minima:', );
                 console.log('Maxima:', );
+                console.log('descripcion:', );
 
                 break;
 
