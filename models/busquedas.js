@@ -17,6 +17,14 @@ class Busquedas{
         }
     }
 
+    get paramsWeatherMap(){
+        return{
+            appid: process.env.OPENWEATHER_KEY,
+            units: 'metric',
+            lang: 'es'
+        }
+    }
+
     async ciudad( lugar = '' ) {
         
         try {
@@ -42,39 +50,44 @@ class Busquedas{
         }
     }
 
-    get paramsWeatherMap(){
-        return{
-            //?lat=9.93333&lon=-84.08333
-            'appid': c7537c8fce9806c2854e97138e9088d9,
-            'units': metric,
-            'lang': es
-        }
-    }
-
-
     async climaLugar (lat, lon) {
         try {
             
             const instance = axios.create({
-                baseURL: `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}`,
-                //api.openweathermap.org/data/2.5/weather
-                
+                baseURL: `https://api.openweathermap.org/data/2.5/weather`,               
+                params: {... this.paramsWeatherMap, lat, lon}
+            })
 
-            });
-
-            //resp.data
+            const resp = await instance.get();
+            const { weather, main } = resp.data;
 
             return{
-                desc: '',
-                min: '',
-                max: '',
-                temp: ''
+                desc: weather[0].description,
+                min: main.temp_min,
+                max: main.temp_max,
+                temp: main.temp
             }
 
 
         } catch (error) {
             console.log(error);
         }
+    }
+
+
+    agregarHistorial( lugar = ''){
+
+        //TODO: prevenir duplicidad
+        if(this.historial.includes(luga.toLocaleLowerCase())){
+            return;
+        }
+
+
+
+        this.historial.unshift(lugar.toLocaleLowerCase());
+
+        //Grabar en db
+
     }
 
 }

@@ -37,32 +37,33 @@ const main = async() => {
                 
                 //TODO: seleccionar el lugar
                 const id = await listarLugares(lugares);
+                if (id === '0') continue;
                 // metodo .find() metodo propio de js - regresara el primer elemento que especificas en el coldback
                 const lugarSel = lugares.find(l => l.id === id);
-                console.log(lugarSel);
+
+                //Guardar DB
+                busquedas.agregarHistorial(lugarSel.nombre);
                 
                 //TODO: clima
-                const clima = await busquedas.climaLugar()
+                const clima = await busquedas.climaLugar(lugarSel.lat, lugarSel.lng);
 
                 //TODO: mostrar resultados
-
                 console.log('\nInformacion de la ciudad\n'.green);
-                console.log('Ciudad:', lugarSel.nombre);
+                console.log('Ciudad:', lugarSel.nombre.green);
                 console.log('Lat:', lugarSel.lat);
                 console.log('Lng:', lugarSel.lng);
-                console.log('Temperatura:', );
-                console.log('Minima:', );
-                console.log('Maxima:', );
-                console.log('descripcion:', );
+                console.log('Temperatura:', clima.temp);
+                console.log('Minima:', clima.min);
+                console.log('Maxima:', clima.max);
+                console.log('descripcion:', clima.desc.green);
 
                 break;
 
             case 2:
-                
-            break;
-
-            case 0:
-                
+                busquedas.historial.forEach((lugar, i) => {
+                    const idx = `${i + 1}.`.green;
+                    console.log(`${ idx } ${ lugar }`);
+                })
             break;
         
         }
